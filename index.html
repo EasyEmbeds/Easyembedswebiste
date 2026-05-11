@@ -25,8 +25,6 @@
                         'ep-text-dim': '#949ba4',
                         'ep-green': '#23a55a',
                         'ep-green-bg': 'rgba(35,165,90,0.15)',
-                        'ep-orange': '#f0801e',
-                        'ep-orange-bg': 'rgba(240,128,30,0.15)',
                     },
                     fontFamily: {
                         'inter': ['Inter', 'sans-serif'],
@@ -39,50 +37,31 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #1e1f22; color: #f2f3f5; }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #1e1f22; }
         ::-webkit-scrollbar-thumb { background: #3f4147; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #5865f2; }
 
-        /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(88,101,242,0.2); }
-            50% { box-shadow: 0 0 40px rgba(88,101,242,0.4); }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
         }
         @keyframes badge-pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(-10px); }
+        }
 
         .animate-fade-in-up { animation: fadeInUp 0.7s ease-out forwards; }
-        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .opacity-start { opacity: 0; }
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
         .delay-500 { animation-delay: 0.5s; }
-        .delay-600 { animation-delay: 0.6s; }
 
-        .opacity-start { opacity: 0; }
-
-        /* Hero glow */
         .hero-glow {
             position: absolute;
             width: 600px;
@@ -95,19 +74,7 @@
             pointer-events: none;
             z-index: 0;
         }
-        .hero-glow-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(88,101,242,0.08) 0%, transparent 70%);
-            bottom: -50px;
-            right: -100px;
-            pointer-events: none;
-            z-index: 0;
-        }
 
-        /* Tool card */
         .tool-card {
             transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -124,16 +91,13 @@
             opacity: 0;
             transition: opacity 0.35s ease;
         }
-        .tool-card:hover::before {
-            opacity: 1;
-        }
+        .tool-card:hover::before { opacity: 1; }
         .tool-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(88,101,242,0.1);
             border-color: rgba(88,101,242,0.3);
         }
 
-        /* Button styles */
         .btn-blurple {
             background: linear-gradient(135deg, #5865f2, #4752c4);
             transition: all 0.25s ease;
@@ -153,7 +117,6 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(88,101,242,0.4);
         }
-        .btn-blurple:active { transform: translateY(0); }
 
         .btn-outline {
             border: 1.5px solid #3f4147;
@@ -166,37 +129,24 @@
             transform: translateY(-2px);
         }
 
-        /* Modal */
         .modal-overlay {
             backdrop-filter: blur(8px);
             background: rgba(0,0,0,0.7);
         }
-        .modal-content {
-            animation: fadeInUp 0.3s ease-out;
-        }
+        .modal-content { animation: fadeInUp 0.3s ease-out; }
 
-        /* Nav mobile menu */
         .mobile-menu {
             transition: all 0.3s ease;
             max-height: 0;
             overflow: hidden;
         }
-        .mobile-menu.open {
-            max-height: 300px;
-        }
+        .mobile-menu.open { max-height: 300px; }
 
-        /* Toast */
         .toast {
             animation: fadeInUp 0.4s ease-out;
         }
-        .toast-exit {
-            animation: fadeOut 0.3s ease-in forwards;
-        }
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translateY(-10px); }
-        }
+        .toast-exit { animation: fadeOut 0.3s ease-in forwards; }
 
-        /* Feature chips */
         .feature-chip {
             background: rgba(88,101,242,0.1);
             border: 1px solid rgba(88,101,242,0.2);
@@ -207,346 +157,181 @@
             border-color: rgba(88,101,242,0.4);
         }
 
-        /* Status badge */
-        .status-live {
-            animation: badge-pulse 2s ease-in-out infinite;
-        }
+        .status-live { animation: badge-pulse 2s ease-in-out infinite; }
 
-        /* Grid pattern */
         .grid-pattern {
-            background-image:
-                linear-gradient(rgba(88,101,242,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(88,101,242,0.03) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(88,101,242,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(88,101,242,0.03) 1px, transparent 1px);
             background-size: 60px 60px;
+        }
+        
+        .tool-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
         }
     </style>
 </head>
 <body class="min-h-screen grid-pattern">
 
-    <!-- Toast Container -->
     <div id="toast-container" class="fixed top-6 right-6 z-[100] flex flex-col gap-3"></div>
 
-    <!-- ==================== HEADER ==================== -->
+    <!-- HEADER -->
     <header class="fixed top-0 left-0 right-0 z-50 border-b border-ep-border/50" style="background: rgba(30,31,34,0.85); backdrop-filter: blur(16px);">
         <div class="max-w-6xl mx-auto px-5 sm:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <a href="#" class="flex items-center gap-3 group">
-                    <img src="https://files.catbox.moe/x9w3b6.png" alt="EasyProject" class="h-8 w-auto transition-transform duration-300 group-hover:scale-105">
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <img src="https://files.catbox.moe/x9w3b6.png" alt="EasyProject" class="h-7 w-auto transition-transform duration-300 group-hover:scale-105">
+                    <span class="text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">EasyProject</span>
                 </a>
-
-                <!-- Desktop Nav -->
                 <nav class="hidden md:flex items-center gap-1">
-                    <a href="#tools" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all duration-200">
-                        <i class="fa-solid fa-grid-2 mr-1.5 text-xs"></i>Tools
-                    </a>
-                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" rel="noopener" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all duration-200">
-                        <i class="fa-brands fa-discord mr-1.5 text-xs"></i>Support Server
-                    </a>
-                    <button onclick="openModal()" class="ml-2 px-4 py-2 text-sm font-semibold text-ep-blurple hover:text-ep-blurple-light border border-ep-blurple/30 hover:border-ep-blurple/60 hover:bg-ep-blurple/10 rounded-lg transition-all duration-200">
-                        <i class="fa-solid fa-lightbulb mr-1.5 text-xs"></i>Request Tool
-                    </button>
+                    <a href="#tools" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all"><i class="fa-solid fa-grid-2 mr-1.5 text-xs"></i>Tools</a>
+                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all"><i class="fa-brands fa-discord mr-1.5 text-xs"></i>Support Server</a>
+                    <button onclick="openModal()" class="ml-2 px-4 py-2 text-sm font-semibold text-ep-blurple hover:text-ep-blurple-light border border-ep-blurple/30 hover:border-ep-blurple/60 hover:bg-ep-blurple/10 rounded-lg transition-all"><i class="fa-solid fa-lightbulb mr-1.5 text-xs"></i>Request Tool</button>
                 </nav>
-
-                <!-- Mobile hamburger -->
-                <button id="mobile-toggle" onclick="toggleMobileMenu()" class="md:hidden p-2 text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all">
-                    <i class="fa-solid fa-bars text-lg" id="menu-icon"></i>
-                </button>
+                <button id="mobile-toggle" onclick="toggleMobileMenu()" class="md:hidden p-2 text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-solid fa-bars text-lg" id="menu-icon"></i></button>
             </div>
-
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="mobile-menu md:hidden">
                 <div class="py-3 pb-4 flex flex-col gap-1 border-t border-ep-border/30">
-                    <a href="#tools" onclick="closeMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all">
-                        <i class="fa-solid fa-grid-2 mr-2"></i>Tools
-                    </a>
-                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" rel="noopener" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all">
-                        <i class="fa-brands fa-discord mr-2"></i>Support Server
-                    </a>
-                    <button onclick="openModal(); closeMobileMenu();" class="mx-1 mt-1 px-4 py-2.5 text-sm font-semibold text-ep-blurple border border-ep-blurple/30 hover:bg-ep-blurple/10 rounded-lg transition-all text-left">
-                        <i class="fa-solid fa-lightbulb mr-2"></i>Request Tool
-                    </button>
+                    <a href="#tools" onclick="closeMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-solid fa-grid-2 mr-2"></i>Tools</a>
+                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-brands fa-discord mr-2"></i>Support Server</a>
+                    <button onclick="openModal(); closeMobileMenu();" class="mx-1 mt-1 px-4 py-2.5 text-sm font-semibold text-ep-blurple border border-ep-blurple/30 hover:bg-ep-blurple/10 rounded-lg text-left"><i class="fa-solid fa-lightbulb mr-2"></i>Request Tool</button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- ==================== HERO ==================== -->
+    <!-- HERO -->
     <section class="relative pt-28 pb-20 sm:pt-36 sm:pb-28 overflow-hidden">
         <div class="hero-glow"></div>
-        <div class="hero-glow-2"></div>
-
         <div class="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
-            <!-- Tagline chip -->
             <div class="opacity-start animate-fade-in-up inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ep-blurple/10 border border-ep-blurple/20 text-ep-blurple-light text-xs font-semibold tracking-wide uppercase mb-8">
-                <i class="fa-solid fa-bolt text-[10px]"></i>
-                Free tools for Discord creators
+                <i class="fa-solid fa-bolt text-[10px]"></i> Free tools for Discord creators
             </div>
-
-            <!-- Title -->
             <h1 class="opacity-start animate-fade-in-up delay-100 text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-ep-text via-ep-text to-ep-text-dim">Easy</span><span class="bg-clip-text text-transparent bg-gradient-to-r from-ep-blurple to-ep-blurple-light">Project</span>
             </h1>
-
-            <!-- Subtitle -->
-            <p class="opacity-start animate-fade-in-up delay-200 text-xl sm:text-2xl font-semibold text-ep-text/90 mb-4">
-                Free tools to level up your Discord server
-            </p>
-
-            <!-- Description -->
-            <p class="opacity-start animate-fade-in-up delay-300 text-base sm:text-lg text-ep-text-dim max-w-2xl mx-auto mb-10 leading-relaxed">
-                A growing collection of utility tools for Discord creators, admins, and power users. Build embeds, moderate servers, and more — all completely free.
-            </p>
-
-            <!-- CTAs -->
+            <p class="opacity-start animate-fade-in-up delay-200 text-xl sm:text-2xl font-semibold text-ep-text/90 mb-4">Free tools to level up your Discord server</p>
+            <p class="opacity-start animate-fade-in-up delay-300 text-base sm:text-lg text-ep-text-dim max-w-2xl mx-auto mb-10 leading-relaxed">A growing collection of utility tools for Discord creators, admins, and power users. Build embeds, protect servers, and more — all completely free.</p>
             <div class="opacity-start animate-fade-in-up delay-400 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://easyembeds.vercel.app/" target="_blank" rel="noopener" class="btn-blurple inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base shadow-lg">
-                    <i class="fa-solid fa-rocket text-sm"></i>
-                    Launch EasyEmbeds
-                </a>
-                <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" rel="noopener" class="btn-outline inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-ep-text-muted font-semibold text-sm sm:text-base">
-                    <i class="fa-brands fa-discord text-sm"></i>
-                    Join Support Server
-                </a>
+                <a href="https://easyembeds.vercel.app/" target="_blank" class="btn-blurple inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base shadow-lg"><i class="fa-solid fa-rocket text-sm"></i>Launch EasyEmbeds</a>
+                <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="btn-outline inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-ep-text-muted font-semibold text-sm sm:text-base"><i class="fa-brands fa-discord text-sm"></i>Join Support Server</a>
             </div>
-
-            <!-- Stats row -->
             <div class="opacity-start animate-fade-in-up delay-500 mt-14 flex items-center justify-center gap-8 sm:gap-14">
-                <div class="text-center">
-                    <div class="text-2xl font-bold text-ep-text">100%</div>
-                    <div class="text-xs text-ep-text-dim mt-0.5">Free Forever</div>
-                </div>
+                <div class="text-center"><div class="text-2xl font-bold text-ep-text">100%</div><div class="text-xs text-ep-text-dim mt-0.5">Free Forever</div></div>
                 <div class="w-px h-10 bg-ep-border"></div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold text-ep-text">1+</div>
-                    <div class="text-xs text-ep-text-dim mt-0.5">Live Tools</div>
-                </div>
+                <div class="text-center"><div class="text-2xl font-bold text-ep-text">2</div><div class="text-xs text-ep-text-dim mt-0.5">Live Tools</div></div>
                 <div class="w-px h-10 bg-ep-border"></div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold text-ep-blurple">More</div>
-                    <div class="text-xs text-ep-text-dim mt-0.5">Coming Soon</div>
-                </div>
+                <div class="text-center"><div class="text-2xl font-bold text-ep-blurple">More</div><div class="text-xs text-ep-text-dim mt-0.5">Coming Soon</div></div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== TOOLS GRID ==================== -->
+    <!-- TOOLS GRID -->
     <section id="tools" class="relative py-20 sm:py-28">
         <div class="max-w-5xl mx-auto px-5 sm:px-8">
-            <!-- Section header -->
             <div class="text-center mb-14">
-                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-                    <i class="fa-solid fa-grid-2 text-ep-blurple mr-2 text-2xl sm:text-3xl"></i>
-                    Our Tools
-                </h2>
-                <p class="text-ep-text-dim text-base sm:text-lg max-w-xl mx-auto">
-                    Each tool is built to solve a real problem for Discord server owners and creators.
-                </p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4"><i class="fa-solid fa-grid-2 text-ep-blurple mr-2 text-2xl sm:text-3xl"></i>Our Tools</h2>
+                <p class="text-ep-text-dim text-base sm:text-lg max-w-xl mx-auto">Each tool is built to solve a real problem for Discord server owners and creators.</p>
             </div>
-
-            <!-- Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-
-                <!-- CARD 1: EasyEmbeds (LIVE) -->
+                <!-- EasyEmbeds (LIVE) with logo -->
                 <div class="tool-card bg-ep-card border border-ep-border rounded-2xl p-7 sm:p-8">
-                    <!-- Top row: Icon + Status -->
                     <div class="flex items-start justify-between mb-6">
-                        <div class="w-14 h-14 rounded-xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center">
-                            <i class="fa-solid fa-layer-group text-ep-blurple text-xl"></i>
+                        <div class="w-14 h-14 rounded-xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center p-2">
+                            <img src="https://files.catbox.moe/x9w3b6.png" alt="EasyEmbeds logo" class="tool-logo">
                         </div>
-                        <span class="status-live inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ep-green-bg text-ep-green text-xs font-bold tracking-wide">
-                            <span class="w-1.5 h-1.5 rounded-full bg-ep-green"></span>
-                            LIVE
-                        </span>
+                        <span class="status-live inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ep-green-bg text-ep-green text-xs font-bold tracking-wide"><span class="w-1.5 h-1.5 rounded-full bg-ep-green"></span>LIVE</span>
                     </div>
-
-                    <!-- Title + Desc -->
                     <h3 class="text-xl font-bold text-ep-text mb-2">EasyEmbeds</h3>
-                    <p class="text-ep-text-dim text-sm leading-relaxed mb-5">
-                        Build and send rich Discord embeds with live preview, JSON editor, character counter, dark/light mode, and multiple embed support.
-                    </p>
-
-                    <!-- Feature chips -->
+                    <p class="text-ep-text-dim text-sm leading-relaxed mb-5">Build and send rich Discord embeds with live preview, JSON editor, character counter, dark/light mode, and multiple embed support.</p>
                     <div class="flex flex-wrap gap-2 mb-7">
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Live Preview</span>
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">JSON Editor</span>
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Multi-Embed</span>
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Dark/Light</span>
                     </div>
-
-                    <!-- CTA -->
-                    <a href="https://easyembeds.vercel.app/" target="_blank" rel="noopener" class="btn-blurple flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white font-semibold text-sm">
-                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                        Launch Tool
-                    </a>
+                    <a href="https://easyembeds.vercel.app/" target="_blank" class="btn-blurple flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white font-semibold text-sm"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>Launch Tool</a>
                 </div>
 
-                <!-- CARD 2: Security Bot (COMING SOON) -->
+                <!-- EasySecurity Bot (LIVE) with logo -->
                 <div class="tool-card bg-ep-card border border-ep-border rounded-2xl p-7 sm:p-8">
-                    <!-- Top row: Icon + Status -->
                     <div class="flex items-start justify-between mb-6">
-                        <div class="w-14 h-14 rounded-xl bg-ep-orange/10 border border-ep-orange/20 flex items-center justify-center">
-                            <i class="fa-solid fa-shield-halved text-ep-orange text-xl"></i>
+                        <div class="w-14 h-14 rounded-xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center p-2">
+                            <img src="https://files.catbox.moe/myfep2.png" alt="EasySecurity Bot logo" class="tool-logo">
                         </div>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ep-orange-bg text-ep-orange text-xs font-bold tracking-wide">
-                            <span class="w-1.5 h-1.5 rounded-full bg-ep-orange"></span>
-                            COMING SOON
-                        </span>
+                        <span class="status-live inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ep-green-bg text-ep-green text-xs font-bold tracking-wide"><span class="w-1.5 h-1.5 rounded-full bg-ep-green"></span>LIVE</span>
                     </div>
-
-                    <!-- Title + Desc -->
-                    <h3 class="text-xl font-bold text-ep-text mb-2">Security Bot</h3>
-                    <p class="text-ep-text-dim text-sm leading-relaxed mb-5">
-                        Discord security bot that protects your server from raids, spam, and malicious links. Auto-moderation with warn/kick/ban/timeout commands.
-                    </p>
-
-                    <!-- Feature chips -->
+                    <h3 class="text-xl font-bold text-ep-text mb-2">EasySecurity Bot</h3>
+                    <p class="text-ep-text-dim text-sm leading-relaxed mb-5">Discord security bot that protects your server from raids, spam, and malicious links. Auto-moderation with warn/kick/ban/timeout commands and full audit logs.</p>
                     <div class="flex flex-wrap gap-2 mb-7">
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Anti-Raid</span>
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Anti-Spam</span>
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Auto-Mod</span>
                         <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Link Filter</span>
                     </div>
-
-                    <!-- CTA -->
-                    <button onclick="openModal()" class="btn-outline flex items-center justify-center gap-2 w-full py-3 rounded-xl text-ep-text-muted font-semibold text-sm border-ep-border hover:border-ep-orange/50 hover:text-ep-orange hover:bg-ep-orange/5">
-                        <i class="fa-solid fa-bell text-xs"></i>
-                        Notify Me
-                    </button>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1503315445489336471&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-blurple flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white font-semibold text-sm"><i class="fa-brands fa-discord text-xs"></i>Add to Server</a>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ==================== CTA SECTION ==================== -->
+    <!-- CTA SECTION -->
     <section class="relative py-20 sm:py-24">
         <div class="max-w-3xl mx-auto px-5 sm:px-8 text-center">
             <div class="bg-ep-card border border-ep-border rounded-2xl p-10 sm:p-14 relative overflow-hidden">
-                <!-- Background decoration -->
                 <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse at 30% 50%, rgba(88,101,242,0.15), transparent 60%);"></div>
-
                 <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center mx-auto mb-6">
-                        <i class="fa-solid fa-lightbulb text-ep-blurple text-2xl"></i>
-                    </div>
+                    <div class="w-16 h-16 rounded-2xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-lightbulb text-ep-blurple text-2xl"></i></div>
                     <h2 class="text-2xl sm:text-3xl font-bold mb-3">Have a tool idea?</h2>
-                    <p class="text-ep-text-dim text-base mb-8 max-w-md mx-auto">
-                        We're always building new tools. Suggest what you need and we might build it next!
-                    </p>
-                    <button onclick="openModal()" class="btn-blurple inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base">
-                        <i class="fa-solid fa-paper-plane text-sm"></i>
-                        Request a Tool
-                    </button>
+                    <p class="text-ep-text-dim text-base mb-8 max-w-md mx-auto">We're always building new tools. Suggest what you need and we might build it next!</p>
+                    <button onclick="openModal()" class="btn-blurple inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base"><i class="fa-solid fa-paper-plane text-sm"></i>Request a Tool</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- FOOTER -->
     <footer class="border-t border-ep-border/50 py-10">
         <div class="max-w-6xl mx-auto px-5 sm:px-8">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-                <!-- Left: Logo + Copyright -->
                 <div class="flex flex-col items-center sm:items-start gap-2">
-                    <div class="flex items-center gap-2.5">
-                        <img src="https://files.catbox.moe/x9w3b6.png" alt="EasyProject" class="h-6 w-auto opacity-80">
-                    </div>
-                    <p class="text-ep-text-dim text-xs">© 2024 EasyProject · Made with ❤️</p>
+                    <div class="flex items-center gap-2.5"><img src="https://files.catbox.moe/x9w3b6.png" alt="EasyProject" class="h-6 w-auto opacity-80"><span class="text-sm font-medium text-ep-text-dim">EasyProject</span></div>
+                    <p class="text-ep-text-dim text-xs">© 2026 EasyProjects Made By Fistygamerz</p>
                 </div>
-
-                <!-- Right: Social links -->
                 <div class="flex items-center gap-3">
-                    <a href="https://x.com/EasyEmbeds" target="_blank" rel="noopener" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all duration-200" title="Follow on X">
-                        <i class="fa-brands fa-x-twitter text-sm"></i>
-                    </a>
-                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" rel="noopener" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all duration-200" title="Join Discord">
-                        <i class="fa-brands fa-discord text-sm"></i>
-                    </a>
+                    <a href="https://x.com/EasyEmbeds" target="_blank" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all"><i class="fa-brands fa-discord text-sm"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- ==================== REQUEST MODAL ==================== -->
+    <!-- REQUEST MODAL (same as before) -->
     <div id="request-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
-        <!-- Overlay -->
         <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
-
-        <!-- Modal Content -->
-        <div class="modal-content relative z-10 bg-ep-card border border-ep-border rounded-2xl w-full max-w-lg shadow-2xl" style="box-shadow: 0 40px 100px rgba(0,0,0,0.5);">
-            <!-- Header -->
+        <div class="modal-content relative z-10 bg-ep-card border border-ep-border rounded-2xl w-full max-w-lg shadow-2xl">
             <div class="flex items-center justify-between p-6 pb-4 border-b border-ep-border/50">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center">
-                        <i class="fa-solid fa-lightbulb text-ep-blurple"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-ep-text">Request a Tool</h3>
-                        <p class="text-xs text-ep-text-dim">Suggest a tool you'd like us to build</p>
-                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-ep-blurple/15 border border-ep-blurple/20 flex items-center justify-center"><i class="fa-solid fa-lightbulb text-ep-blurple"></i></div>
+                    <div><h3 class="text-lg font-bold text-ep-text">Request a Tool</h3><p class="text-xs text-ep-text-dim">Suggest a tool you'd like us to build</p></div>
                 </div>
-                <button onclick="closeModal()" class="w-8 h-8 rounded-lg hover:bg-ep-border/50 flex items-center justify-center text-ep-text-dim hover:text-ep-text transition-all">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-lg hover:bg-ep-border/50 flex items-center justify-center text-ep-text-dim hover:text-ep-text transition-all"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <!-- Form -->
             <form id="request-form" onsubmit="submitRequest(event)" class="p-6">
-                <!-- Contact field -->
-                <div class="mb-5">
-                    <label class="block text-sm font-medium text-ep-text-muted mb-2">
-                        Discord Username or Email
-                        <span class="text-ep-text-dim font-normal ml-1">(optional)</span>
-                    </label>
-                    <input
-                        type="text"
-                        id="request-contact"
-                        placeholder="e.g. username or user@example.com"
-                        class="w-full px-4 py-3 bg-ep-bg border border-ep-border rounded-xl text-ep-text text-sm placeholder-ep-text-dim/50 focus:outline-none focus:border-ep-blurple/50 focus:ring-1 focus:ring-ep-blurple/30 transition-all"
-                    >
-                </div>
-
-                <!-- Suggestion field -->
-                <div class="mb-6">
-                    <label class="block text-sm font-medium text-ep-text-muted mb-2">
-                        Tool Suggestion
-                        <span class="text-red-400 ml-0.5">*</span>
-                    </label>
-                    <textarea
-                        id="request-suggestion"
-                        rows="4"
-                        required
-                        placeholder="Describe the tool you'd like us to build..."
-                        class="w-full px-4 py-3 bg-ep-bg border border-ep-border rounded-xl text-ep-text text-sm placeholder-ep-text-dim/50 focus:outline-none focus:border-ep-blurple/50 focus:ring-1 focus:ring-ep-blurple/30 transition-all resize-none"
-                    ></textarea>
-                </div>
-
-                <!-- Submit -->
-                <button
-                    type="submit"
-                    id="submit-btn"
-                    class="btn-blurple flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-white font-semibold text-sm"
-                >
-                    <i class="fa-solid fa-paper-plane text-xs" id="submit-icon"></i>
-                    <span id="submit-text">Submit Request</span>
-                </button>
+                <div class="mb-5"><label class="block text-sm font-medium text-ep-text-muted mb-2">Discord Username or Email <span class="text-ep-text-dim font-normal ml-1">(optional)</span></label><input type="text" id="request-contact" class="w-full px-4 py-3 bg-ep-bg border border-ep-border rounded-xl text-ep-text text-sm focus:outline-none focus:border-ep-blurple/50" placeholder="e.g. username or user@example.com"></div>
+                <div class="mb-6"><label class="block text-sm font-medium text-ep-text-muted mb-2">Tool Suggestion <span class="text-red-400 ml-0.5">*</span></label><textarea id="request-suggestion" rows="4" required class="w-full px-4 py-3 bg-ep-bg border border-ep-border rounded-xl text-ep-text text-sm focus:outline-none focus:border-ep-blurple/50 resize-none" placeholder="Describe the tool you'd like us to build..."></textarea></div>
+                <button type="submit" id="submit-btn" class="btn-blurple flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-white font-semibold text-sm"><i class="fa-solid fa-paper-plane text-xs" id="submit-icon"></i><span id="submit-text">Submit Request</span></button>
             </form>
         </div>
     </div>
 
-    <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // === Mobile Menu ===
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
             menu.classList.toggle('open');
-            if (menu.classList.contains('open')) {
-                icon.className = 'fa-solid fa-xmark text-lg';
-            } else {
-                icon.className = 'fa-solid fa-bars text-lg';
-            }
+            icon.className = menu.classList.contains('open') ? 'fa-solid fa-xmark text-lg' : 'fa-solid fa-bars text-lg';
         }
         function closeMobileMenu() {
             const menu = document.getElementById('mobile-menu');
@@ -554,17 +339,12 @@
             menu.classList.remove('open');
             icon.className = 'fa-solid fa-bars text-lg';
         }
-
-        // === Modal ===
         function openModal() {
             const modal = document.getElementById('request-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             document.body.style.overflow = 'hidden';
-            // Focus the suggestion field after animation
-            setTimeout(() => {
-                document.getElementById('request-suggestion').focus();
-            }, 100);
+            setTimeout(() => document.getElementById('request-suggestion').focus(), 100);
         }
         function closeModal() {
             const modal = document.getElementById('request-modal');
@@ -572,79 +352,43 @@
             modal.classList.remove('flex');
             document.body.style.overflow = '';
         }
-        // Close modal on Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-        // === Toast System ===
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-
-            const colors = {
-                success: 'bg-ep-green/20 border-ep-green/40 text-ep-green',
-                error: 'bg-red-500/20 border-red-500/40 text-red-400',
-                info: 'bg-ep-blurple/20 border-ep-blurple/40 text-ep-blurple-light',
-            };
-            const icons = {
-                success: 'fa-circle-check',
-                error: 'fa-circle-exclamation',
-                info: 'fa-circle-info',
-            };
-
-            toast.className = `toast flex items-center gap-3 px-5 py-3 rounded-xl border ${colors[type]} text-sm font-medium shadow-lg`;
-            toast.style.background = type === 'success' ? 'rgba(35,165,90,0.15)' : type === 'error' ? 'rgba(239,68,68,0.15)' : 'rgba(88,101,242,0.15)';
+            const icons = { success: 'fa-circle-check', error: 'fa-circle-exclamation' };
+            toast.className = `toast flex items-center gap-3 px-5 py-3 rounded-xl border text-sm font-medium shadow-lg`;
+            toast.style.background = type === 'success' ? 'rgba(35,165,90,0.15)' : 'rgba(239,68,68,0.15)';
+            toast.style.borderColor = type === 'success' ? 'rgba(35,165,90,0.4)' : 'rgba(239,68,68,0.4)';
+            toast.style.color = type === 'success' ? '#23a55a' : '#f87171';
             toast.innerHTML = `<i class="fa-solid ${icons[type]}"></i>${message}`;
-
             container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.add('toast-exit');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
+            setTimeout(() => { toast.classList.add('toast-exit'); setTimeout(() => toast.remove(), 300); }, 4000);
         }
 
-        // === Webhook Submit ===
         async function submitRequest(e) {
             e.preventDefault();
-
             const contact = document.getElementById('request-contact').value.trim();
             const suggestion = document.getElementById('request-suggestion').value.trim();
             const btn = document.getElementById('submit-btn');
             const btnIcon = document.getElementById('submit-icon');
             const btnText = document.getElementById('submit-text');
-
-            if (!suggestion) {
-                showToast('Please describe the tool you want.', 'error');
-                return;
-            }
-
-            // Loading state
+            if (!suggestion) { showToast('Please describe the tool you want.', 'error'); return; }
             btn.disabled = true;
             btnIcon.className = 'fa-solid fa-spinner fa-spin text-xs';
             btnText.textContent = 'Sending...';
-
-            const payload = {
-                content: `📥 **New Tool Request**\n\n**Contact:** ${contact || '_Not provided_'}\n**Suggestion:** ${suggestion}`
-            };
-
+            const payload = { content: `📥 **New Tool Request**\n\n**Contact:** ${contact || '_Not provided_'}\n**Suggestion:** ${suggestion}` };
             try {
                 const res = await fetch('https://discord.com/api/webhooks/1503305746937286737/Z9ClhAA0IztXj3QbIOUSNY2Y6IP4FLXsojdDKQdWx4sg58A9QvQFd2dahi5XnK6WlbGv', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
                 });
-
                 if (res.ok) {
                     showToast('Request submitted successfully! 🎉', 'success');
                     document.getElementById('request-form').reset();
                     setTimeout(closeModal, 800);
-                } else {
-                    throw new Error(`HTTP ${res.status}`);
-                }
+                } else throw new Error(`HTTP ${res.status}`);
             } catch (err) {
-                console.error('Webhook error:', err);
                 showToast('Failed to send. Please try again or join our Discord.', 'error');
             } finally {
                 btn.disabled = false;
@@ -653,18 +397,13 @@
             }
         }
 
-        // === Smooth scroll for anchor links ===
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 const target = document.querySelector(link.getAttribute('href'));
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
             });
         });
 
-        // === Intersection Observer for scroll animations ===
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -673,7 +412,6 @@
                 }
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.tool-card').forEach((el, i) => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
@@ -681,6 +419,5 @@
             observer.observe(el);
         });
     </script>
-
 </body>
 </html>

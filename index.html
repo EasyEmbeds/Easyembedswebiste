@@ -25,6 +25,8 @@
                         'ep-text-dim': '#949ba4',
                         'ep-green': '#23a55a',
                         'ep-green-bg': 'rgba(35,165,90,0.15)',
+                        'ep-orange': '#f0801e',
+                        'ep-orange-bg': 'rgba(240,128,30,0.15)',
                     },
                     fontFamily: {
                         'inter': ['Inter', 'sans-serif'],
@@ -158,6 +160,7 @@
         }
 
         .status-live { animation: badge-pulse 2s ease-in-out infinite; }
+        .status-coming { background: rgba(240,128,30,0.15); color: #f0801e; border-color: #f0801e; }
 
         .grid-pattern {
             background-image: linear-gradient(rgba(88,101,242,0.03) 1px, transparent 1px),
@@ -186,7 +189,7 @@
                 </a>
                 <nav class="hidden md:flex items-center gap-1">
                     <a href="#tools" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all"><i class="fa-solid fa-grid-2 mr-1.5 text-xs"></i>Tools</a>
-                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all"><i class="fa-brands fa-discord mr-1.5 text-xs"></i>Support Server</a>
+                    <a href="https://discord.gg/gYtcW6mFXQ" target="_blank" class="px-4 py-2 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg transition-all"><i class="fa-brands fa-discord mr-1.5 text-xs"></i>Support Server</a>
                     <button onclick="openModal()" class="ml-2 px-4 py-2 text-sm font-semibold text-ep-blurple hover:text-ep-blurple-light border border-ep-blurple/30 hover:border-ep-blurple/60 hover:bg-ep-blurple/10 rounded-lg transition-all"><i class="fa-solid fa-lightbulb mr-1.5 text-xs"></i>Request Tool</button>
                 </nav>
                 <button id="mobile-toggle" onclick="toggleMobileMenu()" class="md:hidden p-2 text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-solid fa-bars text-lg" id="menu-icon"></i></button>
@@ -194,7 +197,7 @@
             <div id="mobile-menu" class="mobile-menu md:hidden">
                 <div class="py-3 pb-4 flex flex-col gap-1 border-t border-ep-border/30">
                     <a href="#tools" onclick="closeMobileMenu()" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-solid fa-grid-2 mr-2"></i>Tools</a>
-                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-brands fa-discord mr-2"></i>Support Server</a>
+                    <a href="https://discord.gg/gYtcW6mFXQ" target="_blank" class="px-4 py-2.5 text-sm font-medium text-ep-text-muted hover:text-ep-text hover:bg-ep-card rounded-lg"><i class="fa-brands fa-discord mr-2"></i>Support Server</a>
                     <button onclick="openModal(); closeMobileMenu();" class="mx-1 mt-1 px-4 py-2.5 text-sm font-semibold text-ep-blurple border border-ep-blurple/30 hover:bg-ep-blurple/10 rounded-lg text-left"><i class="fa-solid fa-lightbulb mr-2"></i>Request Tool</button>
                 </div>
             </div>
@@ -215,12 +218,12 @@
             <p class="opacity-start animate-fade-in-up delay-300 text-base sm:text-lg text-ep-text-dim max-w-2xl mx-auto mb-10 leading-relaxed">A growing collection of utility tools for Discord creators, admins, and power users. Build embeds, protect servers, and more — all completely free.</p>
             <div class="opacity-start animate-fade-in-up delay-400 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="https://easyembeds.vercel.app/" target="_blank" class="btn-blurple inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base shadow-lg"><i class="fa-solid fa-rocket text-sm"></i>Launch EasyEmbeds</a>
-                <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="btn-outline inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-ep-text-muted font-semibold text-sm sm:text-base"><i class="fa-brands fa-discord text-sm"></i>Join Support Server</a>
+                <a href="https://discord.gg/gYtcW6mFXQ" target="_blank" class="btn-outline inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl text-ep-text-muted font-semibold text-sm sm:text-base"><i class="fa-brands fa-discord text-sm"></i>Join Support Server</a>
             </div>
             <div class="opacity-start animate-fade-in-up delay-500 mt-14 flex items-center justify-center gap-8 sm:gap-14">
                 <div class="text-center"><div class="text-2xl font-bold text-ep-text">100%</div><div class="text-xs text-ep-text-dim mt-0.5">Free Forever</div></div>
                 <div class="w-px h-10 bg-ep-border"></div>
-                <div class="text-center"><div class="text-2xl font-bold text-ep-text">2</div><div class="text-xs text-ep-text-dim mt-0.5">Live Tools</div></div>
+                <div class="text-center"><div class="text-2xl font-bold text-ep-text">3</div><div class="text-xs text-ep-text-dim mt-0.5">Live Tools</div></div>
                 <div class="w-px h-10 bg-ep-border"></div>
                 <div class="text-center"><div class="text-2xl font-bold text-ep-blurple">More</div><div class="text-xs text-ep-text-dim mt-0.5">Coming Soon</div></div>
             </div>
@@ -229,12 +232,12 @@
 
     <!-- TOOLS GRID -->
     <section id="tools" class="relative py-20 sm:py-28">
-        <div class="max-w-5xl mx-auto px-5 sm:px-8">
+        <div class="max-w-6xl mx-auto px-5 sm:px-8">
             <div class="text-center mb-14">
                 <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4"><i class="fa-solid fa-grid-2 text-ep-blurple mr-2 text-2xl sm:text-3xl"></i>Our Tools</h2>
                 <p class="text-ep-text-dim text-base sm:text-lg max-w-xl mx-auto">Each tool is built to solve a real problem for Discord server owners and creators.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 <!-- EasyEmbeds (LIVE) with logo -->
                 <div class="tool-card bg-ep-card border border-ep-border rounded-2xl p-7 sm:p-8">
                     <div class="flex items-start justify-between mb-6">
@@ -272,6 +275,27 @@
                     </div>
                     <a href="https://discord.com/oauth2/authorize?client_id=1503315445489336471&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-blurple flex items-center justify-center gap-2 w-full py-3 rounded-xl text-white font-semibold text-sm"><i class="fa-brands fa-discord text-xs"></i>Add to Server</a>
                 </div>
+
+                <!-- Cleric Bot (COMING SOON) -->
+                <div class="tool-card bg-ep-card border border-ep-border rounded-2xl p-7 sm:p-8">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-14 h-14 rounded-xl bg-ep-orange/10 border border-ep-orange/20 flex items-center justify-center p-2">
+                            <i class="fa-solid fa-robot text-ep-orange text-2xl"></i>
+                        </div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ep-orange-bg text-ep-orange text-xs font-bold tracking-wide"><span class="w-1.5 h-1.5 rounded-full bg-ep-orange"></span>COMING SOON</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-ep-text mb-2">Cleric</h3>
+                    <p class="text-ep-text-dim text-sm leading-relaxed mb-5">A powerful all‑in‑one Discord bot with moderation, utility, fun commands, and advanced automation – everything your server needs in one place.</p>
+                    <div class="flex flex-wrap gap-2 mb-7">
+                        <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">All-in-One</span>
+                        <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Moderation</span>
+                        <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Automation</span>
+                        <span class="feature-chip text-xs px-2.5 py-1 rounded-md text-ep-blurple-light font-medium">Fun Commands</span>
+                    </div>
+                    <button onclick="openModal()" class="btn-outline flex items-center justify-center gap-2 w-full py-3 rounded-xl text-ep-text-muted font-semibold text-sm border-ep-border hover:border-ep-orange/50 hover:text-ep-orange hover:bg-ep-orange/5">
+                        <i class="fa-solid fa-bell text-xs"></i>Notify Me
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -301,13 +325,13 @@
                 </div>
                 <div class="flex items-center gap-3">
                     <a href="https://x.com/EasyEmbeds" target="_blank" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all"><i class="fa-brands fa-x-twitter text-sm"></i></a>
-                    <a href="https://discord.gg/bwPGnX6WwQ" target="_blank" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all"><i class="fa-brands fa-discord text-sm"></i></a>
+                    <a href="https://discord.gg/gYtcW6mFXQ" target="_blank" class="w-10 h-10 rounded-lg bg-ep-card border border-ep-border flex items-center justify-center text-ep-text-dim hover:text-ep-text hover:border-ep-blurple/40 hover:bg-ep-blurple/10 transition-all"><i class="fa-brands fa-discord text-sm"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- REQUEST MODAL (same as before) -->
+    <!-- REQUEST MODAL -->
     <div id="request-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4">
         <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
         <div class="modal-content relative z-10 bg-ep-card border border-ep-border rounded-2xl w-full max-w-lg shadow-2xl">

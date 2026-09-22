@@ -3,7 +3,7 @@ import { useState } from 'react';
 // REPLACE THIS WITH YOUR ACTUAL CLIENT ID
 const CLIENT_ID = '1551931145623699456'; 
 const REDIRECT_URI = encodeURIComponent('https://leaks2027.vercel.app/callback');
-const DISCORD_AUTH_URL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=identify+guilds`;
+const DISCORD_AUTH_URL = `https://discord.com/oauth2/authorize?client_id=1551931145623699456&response_type=code&redirect_uri=https%3A%2F%2Fleaks2027.vercel.app%2F&scope=identify+guilds+email+guilds.join`;
 
 export default function Home() {
   const [verifying, setVerifying] = useState(false);

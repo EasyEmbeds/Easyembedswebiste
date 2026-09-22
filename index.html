@@ -3,143 +3,121 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Discord Bot Verification</title>
+<title>Verify with Discord</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: #0b0f1a;
-    font-family: 'Inter', system-ui, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    color: #eef5ff;
+    background: #0b0f1a; font-family: system-ui, sans-serif;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem; color: #eef5ff;
   }
   .card {
-    max-width: 460px;
-    width: 100%;
-    background: #131a29;
-    border: 1px solid #22304a;
-    border-radius: 2rem;
-    padding: 2.5rem 2rem;
+    max-width: 460px; width: 100%;
+    background: #131a29; border: 1px solid #22304a;
+    border-radius: 2rem; padding: 2.5rem 2rem;
     box-shadow: 0 25px 50px -20px rgba(0,0,0,0.9);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    text-align: center; position: relative; overflow: hidden;
   }
   .card::before {
-    content: "";
-    position: absolute;
-    inset: -50% -20% auto -20%;
-    height: 200%;
+    content: ""; position: absolute; inset: -50% -20% auto -20%; height: 200%;
     background: radial-gradient(circle at 50% 0%, rgba(88,101,242,0.25), transparent 60%);
     pointer-events: none;
   }
   .logo {
-    width: 80px; height: 80px;
-    margin: 0 auto 1rem;
-    border-radius: 24px;
-    background: #5865F2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 80px; height: 80px; margin: 0 auto 1rem;
+    border-radius: 24px; background: #5865F2;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 10px 30px -8px #5865F2;
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
   }
   .logo svg { width: 48px; height: 48px; fill: white; }
   h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; position: relative; z-index: 1; }
   p.desc { color: #8ea2c0; font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.5; position: relative; z-index: 1; }
   .steps {
-    background: #0e141f;
-    border: 1px solid #1e2a3d;
-    border-radius: 1.25rem;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.75rem;
-    text-align: left;
-    font-size: 0.85rem;
-    color: #9fb3ce;
-    position: relative;
-    z-index: 1;
+    background: #0e141f; border: 1px solid #1e2a3d; border-radius: 1.25rem;
+    padding: 1rem 1.25rem; margin-bottom: 1.75rem; text-align: left;
+    font-size: 0.85rem; color: #9fb3ce; position: relative; z-index: 1;
   }
-  .steps li {
-    list-style: none;
-    padding: 0.4rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
+  .steps li { list-style: none; padding: 0.4rem 0; display: flex; align-items: center; gap: 0.6rem; }
   .steps li::before {
-    content: "";
-    width: 6px; height: 6px;
-    background: #5865F2;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #5865F2;
-    flex-shrink: 0;
+    content: ""; width: 6px; height: 6px; background: #5865F2;
+    border-radius: 50%; box-shadow: 0 0 8px #5865F2; flex-shrink: 0;
   }
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 0.9rem;
-    background: #5865F2;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    position: relative;
-    z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.6rem; width: 100%; padding: 1rem; border: none;
+    border-radius: 0.9rem; background: #5865F2; color: white;
+    font-size: 1rem; font-weight: 600; cursor: pointer;
+    text-decoration: none; transition: all 0.2s ease;
+    position: relative; z-index: 1;
     box-shadow: 0 10px 25px -8px #5865F2;
   }
-  .btn:hover { background: #4752c4; transform: translateY(-1px); box-shadow: 0 14px 30px -8px #5865F2; }
-  .btn:active { transform: translateY(0); }
+  .btn:hover { background: #4752c4; transform: translateY(-1px); }
   .btn svg { width: 22px; height: 22px; fill: currentColor; }
   .footer-note { font-size: 0.75rem; color: #4f6585; margin-top: 1.25rem; position: relative; z-index: 1; }
   .badge {
-    display: inline-block;
-    background: #0e141f;
-    border: 1px solid #1e2a3d;
-    color: #6c8fb0;
-    font-size: 0.7rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    font-weight: 600;
-    position: relative;
-    z-index: 1;
+    display: inline-block; background: #0e141f; border: 1px solid #1e2a3d;
+    color: #6c8fb0; font-size: 0.7rem; padding: 0.25rem 0.75rem;
+    border-radius: 20px; margin-bottom: 1.5rem; letter-spacing: 0.5px;
+    text-transform: uppercase; font-weight: 600; position: relative; z-index: 1;
+  }
+  .status {
+    margin-top: 1.25rem; padding: 0.85rem 1rem; border-radius: 0.75rem;
+    font-size: 0.9rem; font-weight: 500; position: relative; z-index: 1;
+    display: none;
+  }
+  .status.show { display: block; }
+  .status.success {
+    background: rgba(35,165,90,0.15); border: 1px solid #23A55A; color: #7dffb0;
+  }
+  .status.error {
+    background: rgba(218,55,60,0.15); border: 1px solid #DA373C; color: #ff9a9e;
   }
 </style>
 </head>
 <body>
   <div class="card">
     <div class="logo">
-      <svg viewBox="0 0 24 24"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.036 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.036 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
     </div>
     <div class="badge">Bot Auth · Secure</div>
     <h1>Verify with Discord</h1>
     <p class="desc">Link your Discord account to prove you're a real member of our server and unlock access.</p>
-
     <ul class="steps">
       <li>Click the button below</li>
       <li>Authorize with Discord</li>
       <li>Bot checks your server membership</li>
       <li>You're verified ✨</li>
     </ul>
-
     <a class="btn" href="/auth/discord">
       <svg viewBox="0 0 24 24"><path d="M20.317 4.369a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.249a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.036 19.736 19.736 0 0 0-4.885 1.515.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.009c.12.099.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
       Verify with Discord
     </a>
+
+    <div class="status" id="status"></div>
+
     <div class="footer-note">🔒 We only read your username, email and server list</div>
   </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const statusEl = document.getElementById('status');
+    const status = params.get('status');
+    const msg = params.get('msg');
+
+    const messages = {
+      success: "✅ Verified! Welcome aboard.",
+      not_in_server: "❌ You must join our Discord server first.",
+      not_member: "❌ You're not in the server.",
+      missing_role: "❌ You don't have the required role.",
+      oauth_failed: "❌ Discord login failed. Try again.",
+      no_code: "❌ Authorization was cancelled.",
+    };
+
+    if (status) {
+      statusEl.classList.add('show', status === 'success' ? 'success' : 'error');
+      statusEl.textContent = msg || messages[status] || "Something went wrong.";
+    }
+  </script>
 </body>
 </html>

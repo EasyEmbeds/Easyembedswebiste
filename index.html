@@ -1,452 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RSC | Rocket Super Charger</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Permanent+Marker&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body {
-    background: #0a0a0a;
-    color: #fff;
-    font-family: 'Rajdhani', sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* animated background grid + glow */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(220,0,0,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(220,0,0,0.06) 1px, transparent 1px);
-    background-size: 60px 60px;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(220,0,0,0.25), transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(220,0,0,0.15), transparent 60%);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .wrap { position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; }
-
-  /* ====== TOP BAR ====== */
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 40px;
-    border-bottom: 1px solid rgba(220,0,0,0.3);
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: 'Anton', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 3px;
-    color: #fff;
-  }
-
-  .logo .badge {
-    background: #d10000;
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(220,0,0,0.8), 0 0 40px rgba(220,0,0,0.4);
-    font-size: 1.4rem;
-  }
-
-  .logo span { color: #d10000; }
-
-  .topbar .join-btn {
-    background: #d10000;
-    color: #fff;
-    padding: 10px 26px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border: 2px solid #d10000;
-    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-    transition: 0.2s;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  .topbar .join-btn:hover {
-    background: transparent;
-    color: #d10000;
-    box-shadow: 0 0 25px rgba(220,0,0,0.6);
-  }
-
-  /* ====== HERO ====== */
-  .hero {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 60px 20px 40px;
-    position: relative;
-  }
-
-  .tagline {
-    font-family: 'Permanent+Marker', cursive;
-    font-size: 1.1rem;
-    color: #d10000;
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    animation: flicker 3s infinite;
-  }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; text-shadow: 0 0 15px #d10000; }
-  }
-
-  .main-title {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(5rem, 18vw, 14rem);
-    line-height: 0.85;
-    letter-spacing: 5px;
-    color: #fff;
-    text-transform: uppercase;
-    position: relative;
-    text-shadow:
-      0 0 30px rgba(220,0,0,0.8),
-      0 0 60px rgba(220,0,0,0.5);
-    -webkit-text-stroke: 2px #d10000;
-  }
-
-  .main-title .outline {
-    color: transparent;
-    -webkit-text-stroke: 3px #d10000;
-    display: block;
-    font-size: 0.55em;
-    margin-top: 10px;
-    letter-spacing: 15px;
-    text-shadow: none;
-  }
-
-  /* glitch slash */
-  .main-title::before {
-    content: 'RSC';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    color: #d10000;
-    z-index: -1;
-    transform: translate(6px, 6px);
-    opacity: 0.6;
-    text-shadow: none;
-    -webkit-text-stroke: 0;
-  }
-
-  .sub {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    letter-spacing: 12px;
-    color: #999;
-    margin-top: 20px;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  /* ====== OWNER BAR ====== */
-  .owner-strip {
-    margin-top: 45px;
-    display: inline-flex;
-    align-items: center;
-    gap: 18px;
-    padding: 14px 32px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.9), rgba(80,0,0,0.6), rgba(0,0,0,0.9));
-    border: 1px solid #d10000;
-    border-left: 5px solid #d10000;
-    border-right: 5px solid #d10000;
-    clip-path: polygon(15px 0, 100% 0, calc(100% - 15px) 100%, 0 100%);
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 3px;
-  }
-
-  .owner-strip i { color: #ffcc00; font-size: 1.5rem; }
-  .owner-strip .label { color: #888; font-size: 1.1rem; }
-  .owner-strip .name {
-    color: #fff;
-    font-size: 1.6rem;
-    font-weight: 700;
-    background: #d10000;
-    padding: 4px 16px;
-    letter-spacing: 3px;
-    box-shadow: 0 0 20px rgba(220,0,0,0.8);
-  }
-
-  /* ====== DISCORD CTA ====== */
-  .cta-zone {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding: 0 20px;
-    width: 100%;
-    max-width: 800px;
-  }
-
-  .discord-btn {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    background: #d10000;
-    color: #fff;
-    padding: 22px 55px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    letter-spacing: 4px;
-    text-decoration: none;
-    clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
-    position: relative;
-    transition: 0.25s;
-    box-shadow: 0 0 30px rgba(220,0,0,0.6);
-    border: none;
-    text-transform: uppercase;
-  }
-
-  .discord-btn i { font-size: 2.2rem; }
-
-  .discord-btn:hover {
-    background: #fff;
-    color: #d10000;
-    box-shadow: 0 0 60px rgba(220,0,0,1);
-    transform: translateY(-3px);
-  }
-
-  .discord-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 2px solid #fff;
-    clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
-    pointer-events: none;
-  }
-
-  .link-text {
-    font-family: 'Rajdhani', sans-serif;
-    color: #666;
-    font-size: 1rem;
-    letter-spacing: 3px;
-    font-weight: 600;
-  }
-  .link-text b { color: #d10000; }
-
-  /* ====== STATS ROW ====== */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1px;
-    background: rgba(220,0,0,0.3);
-    margin: 80px 40px 40px;
-    border: 1px solid rgba(220,0,0,0.3);
-    position: relative;
-    z-index: 2;
-  }
-
-  .stat {
-    background: #0d0d0d;
-    padding: 30px 20px;
-    text-align: center;
-    transition: 0.2s;
-  }
-
-  .stat:hover { background: #1a0000; }
-
-  .stat i {
-    font-size: 1.8rem;
-    color: #d10000;
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  .stat h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 3px;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-
-  .stat p {
-    color: #666;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  /* ====== FOOTER ====== */
-  footer {
-    text-align: center;
-    padding: 30px 20px;
-    border-top: 1px solid rgba(220,0,0,0.2);
-    color: #444;
-    font-size: 0.85rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    background: #050505;
-    position: relative;
-    z-index: 2;
-  }
-
-  footer .red { color: #d10000; font-weight: 700; }
-
-  /* ====== MARQUEE ====== */
-  .marquee {
-    background: #d10000;
-    color: #fff;
-    padding: 10px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: 'Anton', sans-serif;
-    letter-spacing: 5px;
-    font-size: 1.1rem;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
-    position: relative;
-    z-index: 2;
-  }
-
-  .marquee-track {
-    display: inline-block;
-    animation: scroll 25s linear infinite;
-  }
-
-  .marquee span { margin: 0 30px; }
-  .marquee i { color: #000; margin: 0 10px; }
-
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  @media (max-width: 600px) {
-    .topbar { padding: 12px 20px; }
-    .topbar .join-btn { padding: 8px 16px; font-size: 0.75rem; }
-    .logo { font-size: 1.2rem; }
-    .logo .badge { width: 34px; height: 34px; font-size: 1.1rem; }
-    .owner-strip { padding: 10px 20px; gap: 10px; }
-    .owner-strip .name { font-size: 1.2rem; padding: 3px 12px; }
-    .owner-strip .label { font-size: 0.9rem; }
-    .discord-btn { padding: 16px 30px; font-size: 1.3rem; gap: 12px; }
-    .discord-btn i { font-size: 1.6rem; }
-    .stats { margin: 60px 15px 30px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="Abdullah Gillani — creative digital designer offering graphic design, Canva designs, social media content, websites and UI/UX solutions.">
+  <title>Abdullah Gillani | Creative Digital Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090b12;
+      --panel: #111521;
+      --panel-2: #151b29;
+      --text: #f4f6fb;
+      --muted: #a4adbf;
+      --line: rgba(255,255,255,.10);
+      --accent: #9b8cff;
+      --accent-2: #63d9d0;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background:
+        radial-gradient(ellipse at 80% 0%, rgba(117,93,255,.14), transparent 36%),
+        radial-gradient(ellipse at 0% 42%, rgba(61,206,195,.07), transparent 28%), var(--bg);
+      color: var(--text); font-family: "DM Sans", sans-serif; line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(var(--max), calc(100% - 44px)); margin: auto; }
+    .nav { height: 82px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); }
+    .brand { font:700 1.15rem "Space Grotesk",sans-serif; letter-spacing:-.04em; }
+    .brand span { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:30px; color:var(--muted); font-size:.92rem; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-cta, .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; border-radius:999px; padding:12px 20px; font-weight:700; transition:.2s ease; }
+    .nav-cta, .btn-primary { background:var(--text); color:#10121a; }
+    .nav-cta:hover, .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,255,255,.12); }
+    .hero { min-height:690px; display:grid; grid-template-columns:1.18fr .82fr; align-items:center; gap:60px; padding:90px 0 105px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:10px; color:#c8c0ff; border:1px solid rgba(155,140,255,.3); background:rgba(155,140,255,.08); padding:7px 13px; border-radius:99px; font-size:.82rem; font-weight:600; }
+    .dot { width:7px; height:7px; border-radius:50%; background:var(--accent-2); box-shadow:0 0 12px var(--accent-2); }
+    h1,h2,h3 { font-family:"Space Grotesk",sans-serif; line-height:1.12; letter-spacing:-.045em; }
+    h1 { font-size:clamp(3.3rem,7vw,6.2rem); margin:25px 0 22px; max-width:760px; }
+    h1 .gradient { background:linear-gradient(100deg,#c7bdff 8%,#8e82ff 52%,#65dcd0 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero-copy { color:var(--muted); font-size:1.08rem; max-width:590px; }
+    .actions { display:flex; flex-wrap:wrap; gap:13px; margin-top:32px; }
+    .btn { border:1px solid var(--line); padding:14px 22px; }
+    .btn-secondary { color:var(--text); background:rgba(255,255,255,.035); }
+    .btn-secondary:hover { border-color:rgba(155,140,255,.65); background:rgba(155,140,255,.08); }
+    .hero-note { margin-top:24px; color:#7f899d; font-size:.86rem; }
+    .visual { min-height:440px; position:relative; display:grid; place-items:center; }
+    .orb { position:absolute; width:310px; height:310px; border-radius:50%; background:linear-gradient(140deg,rgba(155,140,255,.28),rgba(99,217,208,.09)); filter:blur(2px); }
+    .profile-card { position:relative; width:min(100%,360px); padding:28px; border:1px solid rgba(255,255,255,.15); border-radius:28px; background:linear-gradient(145deg,rgba(29,36,55,.95),rgba(15,19,30,.92)); box-shadow:0 30px 90px rgba(0,0,0,.38); transform:rotate(3deg); }
+    .card-top { display:flex; justify-content:space-between; align-items:center; color:var(--muted); font-size:.78rem; }
+    .monogram { margin:36px 0 25px; width:100%; aspect-ratio:1.25; display:block; object-fit:cover; object-position:center 55%; border-radius:20px; border:1px solid rgba(255,255,255,.16); }
+    .profile-card h3 { font-size:1.55rem; margin:0 0 4px; }
+    .profile-card p { margin:0; color:var(--muted); font-size:.9rem; }
+    .floating-tag { position:absolute; padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:#171d2b; box-shadow:0 15px 35px rgba(0,0,0,.25); font-size:.85rem; font-weight:600; }
+    .tag-one { top:65px; right:-5px; transform:rotate(7deg); }
+    .tag-two { bottom:65px; left:-20px; transform:rotate(-7deg); }
+    section { padding:90px 0; border-top:1px solid var(--line); }
+    .section-head { max-width:660px; margin-bottom:38px; }
+    .kicker { color:var(--accent-2); text-transform:uppercase; letter-spacing:.16em; font-size:.76rem; font-weight:700; }
+    h2 { font-size:clamp(2.2rem,4vw,3.5rem); margin:12px 0 14px; }
+    .section-head p, .about-copy { color:var(--muted); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+    .about-copy { font-size:1.04rem; }
+    .values { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .value { padding:20px; background:var(--panel); border:1px solid var(--line); border-radius:16px; }
+    .value strong { display:block; font-family:"Space Grotesk"; font-size:1.02rem; margin-bottom:5px; }
+    .value span { color:var(--muted); font-size:.88rem; }
+    .services { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .service { min-height:205px; padding:25px; border-radius:19px; background:linear-gradient(145deg,var(--panel-2),var(--panel)); border:1px solid var(--line); transition:.25s ease; }
+    .service:hover, .project:hover { transform:translateY(-5px); border-color:rgba(155,140,255,.5); }
+    .service-icon { width:43px; height:43px; display:grid; place-items:center; border-radius:13px; color:#d5ceff; background:rgba(155,140,255,.13); font-size:1.25rem; margin-bottom:22px; }
+    .service h3 { font-size:1.18rem; margin:0 0 9px; letter-spacing:-.025em; }
+    .service p { color:var(--muted); font-size:.9rem; margin:0; }
+    .portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
+    .project { overflow:hidden; border-radius:19px; border:1px solid var(--line); background:var(--panel); transition:.25s ease; }
+    .project-art { aspect-ratio:1.35; padding:20px; display:flex; align-items:flex-end; position:relative; overflow:hidden; }
+    .project-art:before { content:""; position:absolute; width:190px; height:190px; border-radius:50%; right:-40px; top:-50px; background:rgba(255,255,255,.15); }
+    .art-social { background:linear-gradient(135deg,#ea9c72,#8c466f); }
+    .art-brand { background:linear-gradient(135deg,#5d6baf,#222c52); }
+    .art-web { background:linear-gradient(135deg,#347f7d,#142f43); }
+    .art-label { position:relative; z-index:1; font:700 1.6rem "Space Grotesk"; line-height:1.05; max-width:180px; }
+    .project-info { padding:18px 20px 20px; }
+    .project-info strong { font-family:"Space Grotesk"; }
+    .project-info p { margin:4px 0 0; color:var(--muted); font-size:.84rem; }
+    .portfolio-note { margin-top:18px; color:#8993a7; font-size:.85rem; }
+    .process { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+    .step { padding:22px 18px; border-top:1px solid rgba(155,140,255,.55); background:linear-gradient(180deg,rgba(155,140,255,.07),transparent); }
+    .step-num { color:var(--accent); font:700 .85rem "Space Grotesk"; }
+    .step h3 { margin:12px 0 7px; font-size:1.12rem; }
+    .step p { color:var(--muted); font-size:.87rem; margin:0; }
+    .contact-box { padding:clamp(28px,6vw,65px); border:1px solid rgba(155,140,255,.28); border-radius:26px; background:radial-gradient(circle at 100% 0%,rgba(99,217,208,.12),transparent 35%),linear-gradient(135deg,rgba(155,140,255,.13),rgba(17,21,33,.92)); display:flex; align-items:center; justify-content:space-between; gap:30px; }
+    .contact-box h2 { max-width:650px; margin-top:10px; }
+    .contact-box p { color:var(--muted); margin-bottom:0; }
+    .contact-actions { display:flex; flex-direction:column; gap:12px; min-width:190px; }
+    footer { padding:28px 0; color:#8993a7; font-size:.85rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:15px; align-items:center; }
+    .footer-links { display:flex; gap:20px; }
+    .footer-links a:hover { color:var(--text); }
+    @media (max-width:850px) {
+      .hero { grid-template-columns:1fr; gap:20px; padding:75px 0; }
+      .visual { min-height:390px; }
+      .about-grid { grid-template-columns:1fr; gap:25px; }
+      .services,.portfolio-grid { grid-template-columns:repeat(2,1fr); }
+      .process { grid-template-columns:repeat(2,1fr); }
+      .contact-box { align-items:flex-start; flex-direction:column; }
+      .contact-actions { flex-direction:row; flex-wrap:wrap; }
+    }
+    @media (max-width:560px) {
+      .wrap { width:min(100% - 32px,var(--max)); }
+      .nav { height:70px; }
+      .nav-links { gap:14px; font-size:.82rem; }
+      .nav-links a:not(.nav-cta) { display:none; }
+      .nav-cta { padding:10px 15px; }
+      h1 { font-size:3.45rem; }
+      section { padding:70px 0; }
+      .services,.portfolio-grid,.values,.process { grid-template-columns:1fr; }
+      .visual { min-height:350px; }
+      .profile-card { max-width:310px; }
+      .tag-one { right:-4px; }
+      .tag-two { left:-4px; }
+      .footer-inner { align-items:flex-start; flex-direction:column; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { transition:none !important; }
+    }
+  </style>
 </head>
 <body>
+  <header class="wrap nav">
+    <a class="brand" href="#home" aria-label="Abdullah Gillani home">AG<span>.</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a class="nav-cta" href="#contact">Let's talk <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-<div class="wrap">
-
-  <!-- TOP BAR -->
-  <div class="topbar">
-    <div class="logo">
-      <div class="badge"><i class="fas fa-rocket"></i></div>
-      RS<span>C</span>
-    </div>
-    <a href="https://discord.gg/Atw58jyCvq" target="_blank" class="join-btn">Join Discord</a>
-  </div>
-
-  <!-- MARQUEE -->
-  <div class="marquee">
-    <div class="marquee-track">
-      <span>ROCKET SUPER CHARGER</span><i>★</i>
-      <span>RSC GANG</span><i>★</i>
-      <span>OWNER — CRAZY ETC</span><i>★</i>
-      <span>JOIN THE FAMILY</span><i>★</i>
-      <span>ROCKET SUPER CHARGER</span><i>★</i>
-      <span>RSC GANG</span><i>★</i>
-      <span>OWNER — CRAZY ETC</span><i>★</i>
-      <span>JOIN THE FAMILY</span><i>★</i>
-    </div>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="tagline">/// EST. RSC ///</div>
-
-    <h1 class="main-title">
-      RSC
-      <span class="outline">ROCKET</span>
-    </h1>
-
-    <p class="sub">SUPER · CHARGER</p>
-
-    <!-- OWNER -->
-    <div class="owner-strip">
-      <i class="fas fa-crown"></i>
-      <span class="label">OWNER:</span>
-      <span class="name">CRAZY ETC</span>
+  <main>
+    <div class="wrap hero" id="home">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Creative digital designer</div>
+        <h1>Designing ideas into <span class="gradient">digital impact.</span></h1>
+        <p class="hero-copy">Hi, I'm <strong>Abdullah Gillani</strong>. I help businesses, startups and individuals stand out with thoughtful graphic design, engaging social content and modern web experiences.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#portfolio">Explore my work <span aria-hidden="true">↗</span></a>
+          <a class="btn btn-secondary" href="mailto:calipantex@gmail.com">Contact me</a>
+        </div>
+        <p class="hero-note">Creative thinking · Detail-focused design · Digital solutions</p>
+      </div>
+      <div class="visual" aria-label="Abdullah Gillani designer profile graphic">
+        <div class="orb"></div>
+        <div class="profile-card">
+          <div class="card-top"><span>CREATIVE PORTFOLIO</span><span>01 / 04</span></div>
+          <img class="monogram" src="https://files.catbox.moe/swbiiu.jpg" alt="Abdullah Gillani profile image">
+          <h3>Abdullah Gillani</h3>
+          <p>Creative Digital Designer</p>
+        </div>
+        <div class="floating-tag tag-one">✦ Visual design</div>
+        <div class="floating-tag tag-two">⌘ Web experiences</div>
+      </div>
     </div>
 
-    <!-- DISCORD CTA -->
-    <div class="cta-zone">
-      <a href="https://discord.gg/Atw58jyCvq" target="_blank" class="discord-btn">
-        <i class="fab fa-discord"></i>
-        JOIN DISCORD
-        <i class="fas fa-arrow-right"></i>
-      </a>
-      <p class="link-text">DISCORD.GG / <b>ATW58JYCVQ</b></p>
-    </div>
-  </section>
+    <section id="about">
+      <div class="wrap about-grid">
+        <div class="section-head">
+          <div class="kicker">A little about me</div>
+          <h2>Good design makes a lasting impression.</h2>
+        </div>
+        <div>
+          <p class="about-copy">I'm a creative digital designer specializing in Canva Pro, graphic design, social media content, website development and web applications. I enjoy turning ideas into clear, attractive and useful digital experiences.</p>
+          <p class="about-copy">From a single social media graphic to a complete website concept, I focus on understanding the goal, paying attention to the details and delivering work that feels right for the brand.</p>
+          <div class="values">
+            <div class="value"><strong>Creative thinking</strong><span>Fresh ideas with a clear purpose.</span></div>
+            <div class="value"><strong>Attention to detail</strong><span>Care in every part of the design.</span></div>
+            <div class="value"><strong>Quality focused</strong><span>Thoughtful work from start to finish.</span></div>
+            <div class="value"><strong>Client focused</strong><span>Clear communication and collaboration.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat">
-      <i class="fas fa-bolt"></i>
-      <h3>SUPER CHARGED</h3>
-      <p>Always Active</p>
-    </div>
-    <div class="stat">
-      <i class="fas fa-users"></i>
-      <h3>RSC FAMILY</h3>
-      <p>Loyal Gang</p>
-    </div>
-    <div class="stat">
-      <i class="fas fa-fire"></i>
-      <h3>CRAZY ETC</h3>
-      <p>Our Leader</p>
-    </div>
-    <div class="stat">
-      <i class="fas fa-shield-alt"></i>
-      <h3>NO MERCY</h3>
-      <p>Ride or Die</p>
-    </div>
-  </div>
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">What I can do</div>
+          <h2>Services built around your ideas.</h2>
+          <p>Creative support for your brand, content and online presence.</p>
+        </div>
+        <div class="services">
+          <article class="service"><div class="service-icon">✳</div><h3>Canva Pro Design</h3><p>Polished, editable Canva designs for personal and business use.</p></article>
+          <article class="service"><div class="service-icon">▧</div><h3>Graphic Design</h3><p>Eye-catching banners, advertisements, logos and visual assets.</p></article>
+          <article class="service"><div class="service-icon">◎</div><h3>Social Media Content</h3><p>Posts and creative content designed to keep your brand consistent.</p></article>
+          <article class="service"><div class="service-icon">⌘</div><h3>Website Development</h3><p>Modern, responsive website experiences for your online presence.</p></article>
+          <article class="service"><div class="service-icon">◈</div><h3>UI/UX Design</h3><p>Clean interface concepts focused on clarity and usability.</p></article>
+          <article class="service"><div class="service-icon">▤</div><h3>Presentations & Web Apps</h3><p>Well-structured presentations and custom digital solutions.</p></article>
+        </div>
+      </div>
+    </section>
 
-  <!-- FOOTER -->
+    <section id="portfolio">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Selected work</div>
+          <h2>A glimpse of what I create.</h2>
+          <p>A few visual directions that represent the kind of projects I can help bring to life.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="project">
+            <div class="project-art art-social"><div class="art-label">MAKE<br>IT SOCIAL.</div></div>
+            <div class="project-info"><strong>Social Media Design</strong><p>Campaign graphics · Digital content</p></div>
+          </article>
+          <article class="project">
+            <div class="project-art art-brand"><div class="art-label">BUILT TO<br>STAND OUT.</div></div>
+            <div class="project-info"><strong>Brand & Graphic Design</strong><p>Visual identity · Promotional design</p></div>
+          </article>
+          <article class="project">
+            <div class="project-art art-web"><div class="art-label">A BETTER<br>WEB PRESENCE.</div></div>
+            <div class="project-info"><strong>Website & UI Concepts</strong><p>Web design · User interfaces</p></div>
+          </article>
+        </div>
+        <p class="portfolio-note">Note: These are sample visual concepts. Replace them with screenshots or links to your own completed projects before publishing.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">How I work</div>
+          <h2>A simple, collaborative process.</h2>
+        </div>
+        <div class="process">
+          <div class="step"><div class="step-num">01 / DISCOVER</div><h3>Understand</h3><p>We discuss your idea, audience and project goals.</p></div>
+          <div class="step"><div class="step-num">02 / PLAN</div><h3>Shape the idea</h3><p>I map out a clear creative direction for the project.</p></div>
+          <div class="step"><div class="step-num">03 / CREATE</div><h3>Bring it to life</h3><p>I develop the design or digital solution with care.</p></div>
+          <div class="step"><div class="step-num">04 / REFINE</div><h3>Polish & deliver</h3><p>We review the result and refine it against the agreed brief.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div>
+            <div class="kicker">Have a project in mind?</div>
+            <h2>Let's create something worth remembering.</h2>
+            <p>Tell me what you're working on. I'd be happy to discuss your project.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:calipantex@gmail.com">Email Abdullah ↗</a>
+            <!-- Replace the link below with your personal Fiverr profile URL. -->
+            <a class="btn btn-secondary" href="https://www.fiverr.com/" target="_blank" rel="noopener noreferrer">Find me on Fiverr ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer>
-    RSC &nbsp;·&nbsp; ROCKET SUPER CHARGER &nbsp;·&nbsp; OWNER <span class="red">CRAZY ETC</span> &nbsp;·&nbsp; ALL RIGHTS RESERVED
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Abdullah Gillani. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="mailto:calipantex@gmail.com">Email</a>
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </div>
   </footer>
-
-</div>
-
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
